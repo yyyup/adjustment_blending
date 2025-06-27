@@ -218,23 +218,22 @@ This implementation is based on:
 ## 🎯 Current Development Focus
 
 **Next Session Priorities:**
-1. **Complete IK adaptation system** in `ik_adaptation.py`
-2. **Implement real-time constraint management** for foot planting
-3. **Add root motion detection** with automatic IK updates
-4. **Test with rigify characters** and validate foot planting behavior
-5. **Integrate with existing layer system** for seamless workflow
+1. **Finish NLA layer integration** with export options
+2. **Implement GPU acceleration** for real-time preview
+3. **Develop export/import tools** for studio pipelines
+4. **Enhance visualization** for adjustment blending
 
 **Technical Challenges to Solve:**
-- Real-time constraint weight management during root motion
-- Automatic space switching between local/world coordinate systems
-- Performance optimization for real-time IK updates
-- Integration with Blender's constraint system and drivers
+- GPU-based F-curve evaluation for high frame rates
+- Stable NLA layer creation across complex rigs
+- Reliable export/import of adjustment data
+- Integration with existing property system and UI
 
 **Key Files for Next Development:**
-- `ik_adaptation.py`: Core real-time adaptation system
-- `operators.py`: Add IK setup and management operators
-- `ui.py`: Add IK adaptation controls to existing panels
-- `core.py`: Integrate IK adaptation with existing motion analysis
+- `core.py`: GPU utilities and NLA helpers
+- `operators.py`: Export/import and NLA operators
+- `ui.py`: Pipeline integration controls
+- `README.md`: Updated documentation
 
 ---
 

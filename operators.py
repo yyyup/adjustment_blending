@@ -865,10 +865,11 @@ def register():
 
 def unregister():
     """Unregister all operator classes"""
+    bpy.utils.unregister_class(ADJBLEND_OT_create_nla_layer)
     bpy.utils.unregister_class(ADJBLEND_OT_cache_management)
     bpy.utils.unregister_class(ADJBLEND_OT_layer_management)
     bpy.utils.unregister_class(ADJBLEND_OT_fix_sliding_professional)
     bpy.utils.unregister_class(ADJBLEND_OT_apply_adjustment_professional)
     bpy.utils.unregister_class(ADJBLEND_OT_create_adjustment_layer_professional)
     bpy.utils.unregister_class(ADJBLEND_OT_analyze_motion_professional)
-    bpy.utils.unregister_class(ADJBLEND_OT_create_nla_layer)
+
