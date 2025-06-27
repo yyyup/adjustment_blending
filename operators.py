@@ -811,6 +811,48 @@ class ADJBLEND_OT_cache_management(bpy.types.Operator):
         
         return {'FINISHED'}
 
+class ADJBLEND_OT_create_nla_layer(bpy.types.Operator):
+    """Create an NLA layer from the active action or adjustment layer"""
+    bl_idname = "adjblend.create_nla_layer"
+    bl_label = "Create NLA Layer"
+    bl_description = "Create non-destructive NLA layer for pipeline integration"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    layer_name: StringProperty(
+        name="Layer Name",
+        description="Name of the new NLA layer",
+        default="Adjustment NLA"
+    )
+
+    def execute(self, context):
+        arm_obj = context.active_object
+        if not arm_obj:
+            self.report({'WARNING'}, "No active object")
+            return {'CANCELLED'}
+
+        props = context.scene.adjustment_blending
+
+        action = None
+        if props.layers and 0 <= props.active_layer_index < len(props.layers):
+            layer = props.layers[props.active_layer_index]
+            if layer.source_action:
+                action = layer.source_action
+
+        if not action and arm_obj.animation_data and arm_obj.animation_data.action:
+            action = arm_obj.animation_data.action
+
+        if not action:
+            self.report({'WARNING'}, "No action found to create NLA layer")
+            return {'CANCELLED'}
+
+        result = AnimationDataUtils.create_nla_layer(arm_obj, action, self.layer_name)
+        if result:
+            self.report({'INFO'}, f"NLA layer '{self.layer_name}' created")
+            return {'FINISHED'}
+
+        self.report({'ERROR'}, "Failed to create NLA layer")
+        return {'CANCELLED'}
+
 def register():
     """Register all operator classes"""
     bpy.utils.register_class(ADJBLEND_OT_analyze_motion_professional)
@@ -819,9 +861,11 @@ def register():
     bpy.utils.register_class(ADJBLEND_OT_fix_sliding_professional)
     bpy.utils.register_class(ADJBLEND_OT_layer_management)
     bpy.utils.register_class(ADJBLEND_OT_cache_management)
+    bpy.utils.register_class(ADJBLEND_OT_create_nla_layer)
 
 def unregister():
     """Unregister all operator classes"""
+    bpy.utils.unregister_class(ADJBLEND_OT_create_nla_layer)
     bpy.utils.unregister_class(ADJBLEND_OT_cache_management)
     bpy.utils.unregister_class(ADJBLEND_OT_layer_management)
     bpy.utils.unregister_class(ADJBLEND_OT_fix_sliding_professional)

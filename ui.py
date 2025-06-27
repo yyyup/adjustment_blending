@@ -272,12 +272,15 @@ class ADJBLEND_PT_layers_panel(bpy.types.Panel):
             
             # Stack operations
             stack_ops_row = layout.row(align=True)
-            
-            apply_all_op = stack_ops_row.operator("adjblend.apply_adjustment_professional", 
+
+            apply_all_op = stack_ops_row.operator("adjblend.apply_adjustment_professional",
                                                  text="Apply All", icon='CHECKMARK')
             apply_all_op.apply_mode = 'ALL_LAYERS'
-            
-            clear_op = stack_ops_row.operator("adjblend.layer_management", 
+
+            nla_op = stack_ops_row.operator("adjblend.create_nla_layer",
+                                            text="To NLA", icon='NLA')
+
+            clear_op = stack_ops_row.operator("adjblend.layer_management",
                                              text="Clear All", icon='TRASH')
             clear_op.operation = 'CLEAR_ALL'
         
