@@ -872,3 +872,4 @@ def unregister():
     bpy.utils.unregister_class(ADJBLEND_OT_apply_adjustment_professional)
     bpy.utils.unregister_class(ADJBLEND_OT_create_adjustment_layer_professional)
     bpy.utils.unregister_class(ADJBLEND_OT_analyze_motion_professional)
+
